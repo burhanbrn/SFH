@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Welcome</title>
+</head>
+
+<body>
+
+<h1 id="welcomeText"></h1>
+
+<button onclick="logout()">
+Logout
+</button>
+
+<script>
+
+let user =
+JSON.parse(localStorage.getItem("loggedInUser"));
+
+if (!user) {
+    window.location.href = "signin.html";
+}
+
+document.getElementById("welcomeText")
+.innerHTML =
+`Welcome ${user.name} `;
+
+function logout() {
+
+    localStorage.removeItem("loggedInUser");
+
+    window.location.href = "signin.html";
+}
+
+</script>
+
+</body>
+</html>
