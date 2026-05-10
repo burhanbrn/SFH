@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EMI Calculator</title>
+</head>
+<body>
+<div class="container">
+<h1>EMI Calculator</h1>
+<input type="number" id="amount" placeholder="Loan Amount">
+<input type="number" id="rate" placeholder="Interest Rate">
+<input type="number" id="years" placeholder="Years">
+<button onclick="calculateEMI()">
+Calculate EMI
+</button>
+<div class="result" id="result"></div>
+<div class="bank">
+<h3>Bank Interest Rates</h3>
+<p>SBI → 8.5%</p>
+<p>HDFC → 9%</p>
+<p>ICICI → 8.7%</p>
+</div>
+</div>
+
+<style>
+body{
+font-family:Arial;
+align-items: center;
+background:linear-gradient(to top,#dbd6d6a7 ,#ffe100e5);
+color:white;
+padding:50px;
+}
+
+.container{
+max-width:500px;
+margin: 20px auto;
+background:#1e2e45;
+padding:50px;
+border-radius: 25px;
+backdrop-filter: blur(10px);
+}
+
+h1{
+    width:50%;
+    align-items: center;
+    margin: 20px auto;
+}
+input{
+width:100%;
+padding:12px;
+margin:10px 0;
+border:none;
+border-radius:8px;
+display: flex;
+flex-wrap: wrap;
+backdrop-filter: blur(10px);
+}
+
+button{
+width:50%;
+align-items: center;
+padding: 15px;
+background:#d4b800;
+border:none;
+display: block;
+margin: 20px auto;
+color:white;
+border-radius:80px;
+cursor:pointer;
+}
+
+.result{
+margin-top:30px;
+background: #374151;
+padding: 20px;
+border-radius: 15px;
+line-height: 2;
+font-size:18px; 
+align-items: center;
+justify-content: center;
+flex-flow: column;
+}
+
+.bank{
+margin-top:30px;
+background:#374151;
+padding:15px;
+border-radius:10px;
+}
+</style>
+
+<script>
+function calculateEMI(){
+let P =
+parseFloat(document.getElementById("amount").value);
+let annualRate =
+parseFloat(document.getElementById("rate").value);
+let years =
+parseFloat(document.getElementById("years").value);
+
+let R = annualRate / 12 / 100;
+let N = years * 12;
+let EMI =
+(P * R * Math.pow(1 + R, N)) /
+(Math.pow(1 + R, N) - 1);
+
+let totalAmount =
+EMI * N;
+
+let totalInterest =
+totalAmount - P;
+
+document.getElementById("result")
+.innerHTML =
+`<h2>Loan Summary</h2>
+<p><strong>Monthly EMI: </strong>
+    ₹${EMI.toFixed(2)}</p>
+<p><strong>Total Interest: </strong>
+    ₹${totalInterest.toFixed(2)}</p>
+<p><strong>Total Amount to be Paid: </strong>
+    ₹${totalAmount.toFixed(2)}</p>
+`;
+}
+</script>
+</body>
+</html>
